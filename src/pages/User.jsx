@@ -4,14 +4,18 @@ import GithubContext from '../context/github/GithubContext'
 import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Spinner from '../components/layout/Spinner'
+import RepoList from '../components/repos/RepoList'
+
 
 const User = () => {
-  const { getUser, user, loading } = useContext(GithubContext)
+  const { getUser, user, loading, getUserRepos, repos } = useContext(GithubContext)
 
   const params = useParams()
 
   useEffect(() => {
     getUser(params.login)
+    getUserRepos(params.login)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const {
@@ -51,7 +55,9 @@ const User = () => {
                 <img src={avatar_url} alt='' />
               </figure>
               <div className='card-body justify-end'>
-                <h2 className='card-title mb-0'>{name}</h2>
+                <h2 id='name' className='card-title mb-0'>
+                  {name}
+                </h2>
                 <p>{login}</p>
               </div>
             </div>
@@ -141,7 +147,7 @@ const User = () => {
           </div>
         </div>
 
-        {/* <RepoList repos={repos} /> */}
+        <RepoList repos={repos} />
       </div>
     </>
   )

@@ -33,7 +33,7 @@ const UserSearch = () => {
                 type='text'
                 className='w-full pr-40 bg-gray-200 input input-lg text-black'
                 placeholder='Search'
-                text={text}
+                value={text}
                 onChange={handleChange}
               />
               <button
